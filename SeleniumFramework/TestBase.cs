@@ -3,12 +3,14 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.Threading;
 using System;
+using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumFramework
 {
     public class TestBase
     {
         protected IWebDriver _driver;
+        protected WebDriverWait _wait;
 
         [SetUp]
         public void SetUp()
@@ -19,10 +21,11 @@ namespace SeleniumFramework
             _driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
             Console.WriteLine("URL opened.");
 
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             _driver.Manage().Window.Maximize();
             Console.WriteLine("Windows Maximized.");
-            Thread.Sleep(3000);
 
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
         }
 
         [Test]
@@ -30,7 +33,8 @@ namespace SeleniumFramework
         {
             IWebElement search = _driver.FindElement(By.Id("search_query_top"));
             search.SendKeys("t-shirt");
-            Thread.Sleep(3000);
+
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(45));
             Console.WriteLine("Element located.");
         }
 
