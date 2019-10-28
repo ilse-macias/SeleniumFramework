@@ -5,6 +5,8 @@ using System.Threading;
 using System;
 using OpenQA.Selenium.Support.UI;
 
+using Constants;
+
 namespace SeleniumFramework
 {
     public class TestBase
@@ -18,12 +20,12 @@ namespace SeleniumFramework
             _driver = new ChromeDriver();
 
             _driver.Manage().Cookies.DeleteAllCookies();
-            _driver.Navigate().GoToUrl("http://automationpractice.com/index.php");
-            Console.WriteLine("URL opened.");
+            _driver.Navigate().GoToUrl(ConstantsBase.Url);
+            Console.WriteLine(ConstantsBase.UrlMessage);
 
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
             _driver.Manage().Window.Maximize();
-            Console.WriteLine("Windows Maximized.");
+            Console.WriteLine(ConstantsBase.MaximizeMessage);
 
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
         }
@@ -43,7 +45,7 @@ namespace SeleniumFramework
         {
             _driver.Close();
             _driver.Quit();
-            Console.WriteLine("Close Browser.");
+            Console.WriteLine(ConstantsBase.CloseBrowserMessage);
         }
     }
 }
