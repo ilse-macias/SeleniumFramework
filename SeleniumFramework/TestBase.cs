@@ -1,11 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System.Threading;
-using System;
 using OpenQA.Selenium.Support.UI;
 
 using Constants;
+using Utilities;
 
 namespace SeleniumFramework
 {
@@ -13,6 +14,12 @@ namespace SeleniumFramework
     {
         protected IWebDriver _driver;
         protected WebDriverWait _wait;
+        protected GenerateMessage _generateMessage;
+
+        public TestBase()
+        {
+            _generateMessage = new GenerateMessage(_driver);
+        }
 
         [SetUp]
         public void SetUp()
@@ -21,12 +28,11 @@ namespace SeleniumFramework
 
             _driver.Manage().Cookies.DeleteAllCookies();
             _driver.Navigate().GoToUrl(ConstantsBase.Url);
-            Console.WriteLine(ConstantsBase.UrlMessage);
-
+            _generateMessage.FileLog(ConstantsBase.UrlMessage);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
-            _driver.Manage().Window.Maximize();
-            Console.WriteLine(ConstantsBase.MaximizeMessage);
 
+            _driver.Manage().Window.Maximize();
+            _generateMessage.FileLog(ConstantsBase.MaximizeMessage);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
         }
 
@@ -35,8 +41,9 @@ namespace SeleniumFramework
         {
             IWebElement search = _driver.FindElement(By.Id("search_query_top"));
             search.SendKeys("t-shirt");
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
 
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(45));
+
             Console.WriteLine("Element located.");
         }
 
@@ -45,7 +52,8 @@ namespace SeleniumFramework
         {
             _driver.Close();
             _driver.Quit();
-            Console.WriteLine(ConstantsBase.CloseBrowserMessage);
+            _generateMessage.FileLog(ConstantsBase.CloseBrowserMessage);
+            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
     }
 }

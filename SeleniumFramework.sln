@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumFramework", "SeleniumFramework\SeleniumFramework.csproj", "{D6D6DFBD-E5B1-4E9C-9755-BA7A9DC991F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Constants", "Constants\Constants.csproj", "{F5A41D29-93EA-48A7-BEA4-7A6A65946F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Constants", "Constants\Constants.csproj", "{F5A41D29-93EA-48A7-BEA4-7A6A65946F22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{DABB172E-FBC2-483C-9357-61B26E29761E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F5A41D29-93EA-48A7-BEA4-7A6A65946F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A41D29-93EA-48A7-BEA4-7A6A65946F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A41D29-93EA-48A7-BEA4-7A6A65946F22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABB172E-FBC2-483C-9357-61B26E29761E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABB172E-FBC2-483C-9357-61B26E29761E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABB172E-FBC2-483C-9357-61B26E29761E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABB172E-FBC2-483C-9357-61B26E29761E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
