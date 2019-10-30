@@ -4,12 +4,12 @@ using System;
 
 namespace Utilities
 {
-    public class GenerateMessage
+    public class GenerateEvidences
     {
         private IWebDriver _driver;
         private WebDriverWait _wait;
 
-        public GenerateMessage(IWebDriver _driver)
+        public GenerateEvidences(IWebDriver _driver)
         {
             this._driver = _driver;
         }

@@ -14,11 +14,11 @@ namespace SeleniumFramework
     {
         protected IWebDriver _driver;
         protected WebDriverWait _wait;
-        protected GenerateMessage _generateMessage;
+        protected GenerateEvidences _generateEvidences;
 
         public TestBase()
         {
-            _generateMessage = new GenerateMessage(_driver);
+            _generateEvidences = new GenerateEvidences(_driver);
         }
 
         [SetUp]
@@ -28,11 +28,11 @@ namespace SeleniumFramework
 
             _driver.Manage().Cookies.DeleteAllCookies();
             _driver.Navigate().GoToUrl(ConstantsBase.Url);
-            _generateMessage.FileLog(ConstantsBase.UrlMessage);
+            _generateEvidences.FileLog(ConstantsBase.UrlMessage);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
 
             _driver.Manage().Window.Maximize();
-            _generateMessage.FileLog(ConstantsBase.MaximizeMessage);
+            _generateEvidences.FileLog(ConstantsBase.MaximizeMessage);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
         }
 
@@ -42,7 +42,7 @@ namespace SeleniumFramework
             IWebElement search = _driver.FindElement(By.Id("search_query_top"));
             search.SendKeys("t-shirt");
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-
+           // _wait.Until(ExpectedConditions.ElementIsVisible(search));
 
             Console.WriteLine("Element located.");
         }
@@ -52,7 +52,7 @@ namespace SeleniumFramework
         {
             _driver.Close();
             _driver.Quit();
-            _generateMessage.FileLog(ConstantsBase.CloseBrowserMessage);
+            _generateEvidences.FileLog(ConstantsBase.CloseBrowserMessage);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
         }
     }
