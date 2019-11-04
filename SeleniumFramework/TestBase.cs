@@ -2,11 +2,11 @@
 using NUnit.Framework;
 
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 using Constants;
 using Utilities;
+using Enum;
 
 namespace SeleniumFramework
 {
@@ -15,16 +15,19 @@ namespace SeleniumFramework
         protected IWebDriver _driver;
         protected WebDriverWait _wait;
         protected GenerateEvidences _generateEvidences;
+        protected CrossBrowser _crossBrowser;
 
-        public TestBase()
+        public TestBase() 
         {
             _generateEvidences = new GenerateEvidences(_driver);
+            _crossBrowser = new CrossBrowser(_driver);
         }
 
         [SetUp]
         public void SetUp()
         {
-            _driver = new ChromeDriver();
+            _driver = _crossBrowser.Driver(EnumBrowser.BrowserOption.Firefox);
+            //_driver = new ChromeDriver();
 
             _driver.Manage().Cookies.DeleteAllCookies();
             _driver.Navigate().GoToUrl(ConstantsBase.Url);
