@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace Utilities
 {
@@ -16,6 +17,7 @@ namespace Utilities
 
         public void FileLog(string message)
         {
+            Thread.Sleep(3000);
             Console.WriteLine("*** " + message + " ***");
         }
 
@@ -30,6 +32,22 @@ namespace Utilities
             {
                 FileLog(ex.Message);
             }
+        }
+
+        public void TakeScreenshot()
+        {
+            try
+            {
+                Screenshot screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
+                screenshot.SaveAsFile("C:\\Repositories\\SeleniumFramework\\Screenshot\\scr.png", ScreenshotImageFormat.Png);
+                FileLog("Take a screenshot.");
+            }
+
+            catch (NullReferenceException ex)
+            {
+                FileLog(ex.Message);
+            }
+
         }
     }
 }

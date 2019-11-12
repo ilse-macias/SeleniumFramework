@@ -26,12 +26,13 @@ namespace SeleniumFramework
         [SetUp]
         public void SetUp()
         {
-            _driver = _crossBrowser.Driver(EnumBrowser.BrowserOption.Firefox);
+            _driver = _crossBrowser.Driver(EnumBrowser.BrowserOption.Chrome);
             //_driver = new ChromeDriver();
 
             _driver.Manage().Cookies.DeleteAllCookies();
             _driver.Navigate().GoToUrl(ConstantsBase.Url);
             _generateEvidences.FileLog(ConstantsBase.UrlMessage);
+           // _generateEvidences.TakeScreenshot();
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(5));
 
             _driver.Manage().Window.Maximize();
@@ -45,8 +46,9 @@ namespace SeleniumFramework
             IWebElement search = _driver.FindElement(By.Id("search_query_top"));
             search.SendKeys("t-shirt");
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
-           // _wait.Until(ExpectedConditions.ElementIsVisible(search));
+            // _wait.Until(ExpectedConditions.ElementIsVisible(search));
 
+            _generateEvidences.TakeScreenshot();
             Console.WriteLine("Element located.");
         }
 
