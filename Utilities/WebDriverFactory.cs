@@ -1,25 +1,21 @@
 ﻿using System;
-
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
-
 using Enum;
 
 namespace Utilities
 {
-    public class CrossBrowser
+    public class WebDriverFactory
     {
-        private IWebDriver _driver;
         private GenerateEvidences _generateEvidences;
 
-        public CrossBrowser(IWebDriver _driver)
+        public WebDriverFactory(GenerateEvidences generateEvidences)
         {
-            this._driver = _driver;
-            _generateEvidences = new GenerateEvidences(_driver);
+            _generateEvidences = generateEvidences;
         }
 
-        public IWebDriver Driver(EnumBrowser.BrowserOption option)
+        public IWebDriver GetDriver(EnumBrowser.BrowserOption option)
         {
             try
             {
@@ -32,15 +28,17 @@ namespace Utilities
                     case EnumBrowser.BrowserOption.Firefox:
                         _generateEvidences.FileLog("Mozilla Firefox");
                         return new FirefoxDriver();
+
+                    default:
+                        throw new ArgumentException("There is no driver for the selected option " + option.ToString());
                 }
             }
-
-            catch(NullReferenceException ex)
+            catch (Exception ex)
             {
-                _generateEvidences.FileLog(ex.Message);
+                _generateEvidences.FileLog("There was an unexpected exception when getting WebDriver. Exception: " + ex.Message + ex.StackTrace);
+                throw;
             }
 
-            return default (IWebDriver);
         }
     }
 }

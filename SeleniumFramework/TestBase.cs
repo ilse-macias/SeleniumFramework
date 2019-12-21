@@ -1,9 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-
 using Constants;
 using Utilities;
 using Enum;
@@ -15,18 +13,18 @@ namespace SeleniumFramework
         protected IWebDriver _driver;
         protected WebDriverWait _wait;
         protected GenerateEvidences _generateEvidences;
-        protected CrossBrowser _crossBrowser;
+        protected WebDriverFactory _webDriverFactory;
 
         public TestBase() 
         {
             _generateEvidences = new GenerateEvidences(_driver);
-            _crossBrowser = new CrossBrowser(_driver);
+            _webDriverFactory = new WebDriverFactory(_generateEvidences);
         }
 
         [SetUp]
         public void SetUp()
         {
-            _driver = _crossBrowser.Driver(EnumBrowser.BrowserOption.Chrome);
+            _driver = _webDriverFactory.GetDriver(EnumBrowser.BrowserOption.Chrome);
             //_driver = new ChromeDriver();
 
             _driver.Manage().Cookies.DeleteAllCookies();
@@ -57,8 +55,7 @@ namespace SeleniumFramework
         {
             _driver.Close();
             _driver.Quit();
-            _generateEvidences.FileLog(ConstantsBase.CloseBrowserMessage);
-            _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+            _generateEvidences.FileLog(ConstantsBase.CloseBrowserMessage);            
         }
     }
 }
